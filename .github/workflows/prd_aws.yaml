@@ -70,6 +70,6 @@ jobs:
         # be deployed to ECS.
         VERSION=$(jq -r .version package.json)
         VERSION_TAG=$VERSION.b$CIRCLE_BUILD_NUM
-        docker build --build-arg skip_dev_deps=true -t ka-nabellinc/redash:$VERSION_TAG .
+        docker build --build-arg skip_dev_deps=true -t $ECR_REGISTRY/$ECR_REPOSITORY:$VERSION_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$VERSION_TAG
-        echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+        echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$VERSION_TAG"
